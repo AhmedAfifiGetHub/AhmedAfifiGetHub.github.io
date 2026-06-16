@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ahmed Afifi — Data Analyst Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F5F0E8;
+    --ink: #1A1208;
+    --accent: #1F4E79;
+    --accent2: #2E75B6;
+    --accent3: #C8441A;
+    --muted: #7A6E5F;
+    --card: #FFFDF7;
+    --border: #D9D0BC;
+    --mono: 'DM Mono', monospace;
+    --serif: 'DM Serif Display', serif;
+    --sans: 'DM Sans', sans-serif;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { background:var(--bg); color:var(--ink); font-family:var(--sans); font-size:16px; line-height:1.6; overflow-x:hidden; }
+
+  body::before {
+    content:''; position:fixed; inset:0;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events:none; z-index:1000; opacity:0.4;
+  }
+
+  nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; justify-content:space-between; align-items:center; padding:1.25rem 3rem; background:rgba(245,240,232,0.88); backdrop-filter:blur(12px); border-bottom:1px solid var(--border); }
+  .nav-logo { font-family:var(--mono); font-size:0.85rem; font-weight:500; color:var(--accent); letter-spacing:0.08em; text-transform:uppercase; }
+  .nav-links { display:flex; gap:2.5rem; list-style:none; }
+  .nav-links a { font-family:var(--mono); font-size:0.8rem; color:var(--muted); text-decoration:none; letter-spacing:0.06em; text-transform:uppercase; transition:color 0.2s; }
+  .nav-links a:hover { color:var(--ink); }
+
+  .hero { min-height:100vh; display:grid; grid-template-columns:1fr 1fr; padding-top:80px; overflow:hidden; }
+  .hero-left { display:flex; flex-direction:column; justify-content:center; padding:5rem 3rem 5rem 5rem; z-index:2; }
+  .hero-eyebrow { font-family:var(--mono); font-size:0.78rem; color:var(--accent3); letter-spacing:0.14em; text-transform:uppercase; margin-bottom:1.5rem; opacity:0; animation:fadeUp 0.7s 0.2s forwards; }
+  .hero-name { font-family:var(--serif); font-size:clamp(3rem,5.5vw,5rem); line-height:1.05; color:var(--ink); margin-bottom:0.5rem; opacity:0; animation:fadeUp 0.7s 0.35s forwards; }
+  .hero-name em { font-style:italic; color:var(--accent); }
+  .hero-title { font-family:var(--serif); font-size:clamp(1.2rem,2vw,1.75rem); color:var(--muted); font-style:italic; margin-bottom:2rem; opacity:0; animation:fadeUp 0.7s 0.5s forwards; }
+  .hero-bio { font-size:1rem; color:var(--muted); max-width:38ch; line-height:1.75; margin-bottom:2.5rem; font-weight:300; opacity:0; animation:fadeUp 0.7s 0.65s forwards; }
+  .hero-cta { display:flex; gap:1rem; opacity:0; animation:fadeUp 0.7s 0.8s forwards; }
+  .btn { display:inline-flex; align-items:center; gap:0.5rem; padding:0.75rem 1.5rem; font-family:var(--mono); font-size:0.8rem; letter-spacing:0.08em; text-transform:uppercase; text-decoration:none; border:1.5px solid; transition:all 0.2s; }
+  .btn-primary { background:var(--accent); color:#fff; border-color:var(--accent); }
+  .btn-primary:hover { background:transparent; color:var(--accent); }
+  .btn-secondary { background:transparent; color:var(--ink); border-color:var(--border); }
+  .btn-secondary:hover { border-color:var(--ink); }
+
+  .hero-right { display:flex; align-items:center; justify-content:center; opacity:0; animation:fadeIn 1s 0.5s forwards; }
+  .tools-display { display:grid; grid-template-columns:1fr 1fr; gap:1.25rem; width:400px; }
+  .tool-card { background:var(--card); border:1px solid var(--border); padding:1.75rem 1.5rem; position:relative; overflow:hidden; }
+  .tool-card::after { content:''; position:absolute; bottom:0; left:0; right:0; height:3px; }
+  .tool-card.sql::after { background:#1F4E79; }
+  .tool-card.python::after { background:#2E75B6; }
+  .tool-card.excel::after { background:#217346; }
+  .tool-card.tableau::after { background:#E97627; }
+  .tool-icon { font-size:2rem; margin-bottom:0.75rem; }
+  .tool-name { font-family:var(--serif); font-size:1.25rem; color:var(--ink); margin-bottom:0.3rem; }
+  .tool-use { font-family:var(--mono); font-size:0.65rem; color:var(--muted); letter-spacing:0.06em; line-height:1.5; }
+
+  section { padding:5rem; }
+  .section-label { font-family:var(--mono); font-size:0.72rem; color:var(--accent3); letter-spacing:0.14em; text-transform:uppercase; margin-bottom:0.75rem; }
+  .section-title { font-family:var(--serif); font-size:clamp(2rem,4vw,3rem); line-height:1.1; margin-bottom:0.5rem; }
+  .section-sub { color:var(--muted); font-weight:300; max-width:55ch; margin-bottom:3.5rem; }
+
+  #background { background:#1A1208; color:var(--bg); }
+  #background .section-label { color:#C8A87A; }
+  #background .section-title { color:var(--bg); }
+  #background .section-sub { color:#7A7060; }
+  .bg-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.5px; background:#2A2418; }
+  .bg-cell { background:#1A1208; padding:2.5rem; }
+  .bg-cell:hover { background:#1F1A0E; }
+  .bg-role { font-family:var(--serif); font-size:1.2rem; color:var(--bg); margin-bottom:0.25rem; }
+  .bg-company { font-family:var(--mono); font-size:0.72rem; color:#C8A87A; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:0.75rem; }
+  .bg-desc { font-size:0.85rem; color:#7A7060; line-height:1.7; font-weight:300; }
+  .bg-tags { display:flex; flex-wrap:wrap; gap:0.4rem; margin-top:0.85rem; }
+  .bg-tag { font-family:var(--mono); font-size:0.62rem; padding:0.2rem 0.55rem; border:1px solid #3A3428; color:#9A9080; letter-spacing:0.05em; }
+
+  #projects { background:var(--bg); }
+  .projects-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; }
+  .project-card { background:var(--card); border:1px solid var(--border); padding:2rem; position:relative; transition:transform 0.2s, box-shadow 0.2s; overflow:hidden; }
+  .project-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; transform:scaleX(0); transform-origin:left; transition:transform 0.3s; }
+  .project-card.c-tableau::before { background:#E97627; }
+  .project-card.c-python::before { background:#2E75B6; }
+  .project-card.c-sql::before { background:#1F4E79; }
+  .project-card.c-excel::before { background:#217346; }
+  .project-card:hover::before { transform:scaleX(1); }
+  .project-card:hover { transform:translateY(-3px); box-shadow:0 12px 40px rgba(0,0,0,0.08); }
+  .project-card.featured { grid-column:1 / -1; padding:2.5rem; }
+  .project-num { font-family:var(--mono); font-size:0.68rem; color:var(--muted); letter-spacing:0.1em; margin-bottom:1rem; }
+  .project-title { font-family:var(--serif); font-size:1.4rem; margin-bottom:0.5rem; line-height:1.2; }
+  .project-desc { font-size:0.9rem; color:var(--muted); line-height:1.75; margin-bottom:1rem; font-weight:300; }
+  .project-stack { display:flex; flex-wrap:wrap; gap:0.4rem; margin-bottom:1.5rem; }
+  .stack-tag { font-family:var(--mono); font-size:0.65rem; padding:0.2rem 0.65rem; background:var(--bg); border:1px solid var(--border); color:var(--muted); }
+  .project-link { font-family:var(--mono); font-size:0.75rem; color:var(--accent); text-decoration:none; letter-spacing:0.06em; text-transform:uppercase; display:inline-flex; align-items:center; gap:0.4rem; transition:gap 0.2s; }
+  .project-link:hover { gap:0.8rem; }
+  .finding-box { background:var(--bg); border:1px solid var(--border); border-left:3px solid var(--accent); padding:1rem 1.25rem; margin:1rem 0 1.25rem; }
+  .finding-label { font-family:var(--mono); font-size:0.65rem; color:var(--accent); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:0.25rem; }
+  .finding-text { font-size:0.85rem; color:var(--muted); font-weight:300; line-height:1.6; }
+
+  #tools { background:#EEEAE0; }
+  .tools-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1.5rem; }
+  .tool-big { background:var(--card); border:1px solid var(--border); padding:2rem; }
+  .tool-big-icon { font-size:2.5rem; margin-bottom:1rem; }
+  .tool-big-name { font-family:var(--serif); font-size:1.25rem; margin-bottom:0.5rem; }
+  .tool-big-desc { font-size:0.82rem; color:var(--muted); line-height:1.6; font-weight:300; margin-bottom:0.75rem; }
+  .tool-skills { display:flex; flex-direction:column; gap:0; }
+  .tool-skill { font-family:var(--mono); font-size:0.63rem; color:var(--muted); padding:0.35rem 0; border-bottom:1px solid var(--border); }
+
+  #contact { background:#1A1208; color:var(--bg); text-align:center; padding:6rem 5rem; }
+  #contact .section-label { color:#C8A87A; }
+  #contact .section-title { color:var(--bg); }
+  #contact .section-sub { color:#7A7060; margin:0 auto 2.5rem; }
+  .contact-links { display:flex; justify-content:center; gap:1.5rem; flex-wrap:wrap; }
+  .contact-btn { display:inline-flex; align-items:center; gap:0.5rem; padding:0.85rem 2rem; font-family:var(--mono); font-size:0.78rem; letter-spacing:0.1em; text-transform:uppercase; text-decoration:none; border:1px solid #3A3428; color:var(--bg); transition:all 0.2s; }
+  .contact-btn:hover { background:var(--accent); border-color:var(--accent); }
+
+  footer { background:#0E0C06; padding:1.5rem 5rem; display:flex; justify-content:space-between; align-items:center; }
+  footer p { font-family:var(--mono); font-size:0.68rem; color:#3A3428; letter-spacing:0.06em; }
+
+  @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+  @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+
+  @media(max-width:900px){
+    nav{padding:1rem 1.5rem;} .nav-links{display:none;}
+    .hero{grid-template-columns:1fr;} .hero-left{padding:6rem 1.5rem 3rem;} .hero-right{display:none;}
+    section{padding:4rem 1.5rem;}
+    .bg-grid,.projects-grid,.tools-grid{grid-template-columns:1fr;}
+    .project-card.featured{grid-column:auto;}
+    footer{flex-direction:column;gap:0.5rem;padding:1.5rem;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Ahmed Afifi</div>
+  <ul class="nav-links">
+    <li><a href="#background">Background</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#tools">Tools</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" style="padding:0">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Available for hire · Entry-level analyst</p>
+    <h1 class="hero-name">Ahmed<br><em>Afifi</em></h1>
+    <p class="hero-title">Data Analyst</p>
+    <p class="hero-bio">Quality professional turned data analyst. I bring the rigour of QC/QA work — systematic, evidence-based, defect-intolerant — to data. Certified in SQL, Python, Excel, and Tableau.</p>
+    <div class="hero-cta">
+      <a href="#projects" class="btn btn-primary">View Projects →</a>
+      <a href="#contact" class="btn btn-secondary">Get in Touch</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="tools-display">
+      <div class="tool-card sql">
+        <div class="tool-icon">🗄️</div>
+        <div class="tool-name">SQL</div>
+        <div class="tool-use">Querying · Aggregation<br>Window functions · CTEs</div>
+      </div>
+      <div class="tool-card python">
+        <div class="tool-icon">🐍</div>
+        <div class="tool-name">Python</div>
+        <div class="tool-use">pandas · NumPy<br>Matplotlib · Seaborn</div>
+      </div>
+      <div class="tool-card excel">
+        <div class="tool-icon">📋</div>
+        <div class="tool-name">Excel</div>
+        <div class="tool-use">Pivot tables · VLOOKUP<br>Dashboards · Formulas</div>
+      </div>
+      <div class="tool-card tableau">
+        <div class="tool-icon">📊</div>
+        <div class="tool-name">Tableau</div>
+        <div class="tool-use">Interactive dashboards<br>Filters · Calculated fields</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BACKGROUND -->
+<section id="background">
+  <p class="section-label">Where I come from</p>
+  <h2 class="section-title">QC/QA Background</h2>
+  <p class="section-sub">Quality work is data work — tracking defect rates, maintaining inspection logs, spotting patterns in non-conformances. That's exactly what analysts do.</p>
+  <div class="bg-grid">
+    <div class="bg-cell">
+      <div class="bg-role">Quality Assurance Engineer</div>
+      <div class="bg-company">Ceer Motors · Jan 2026 – Present</div>
+      <p class="bg-desc">Saudi Arabia's first EV brand. End-of-line inspections across all vehicle systems — body, paint, electrical, NVH, sealing. Track defect patterns across production batches, maintain traceability of inspection records, and coordinate corrective actions with engineering teams.</p>
+      <div class="bg-tags">
+        <span class="bg-tag">Defect Tracking</span><span class="bg-tag">Diagnostic Tools</span><span class="bg-tag">ADAS Verification</span><span class="bg-tag">NVH Testing</span><span class="bg-tag">Audit Documentation</span>
+      </div>
+    </div>
+    <div class="bg-cell">
+      <div class="bg-role">Quality Control Inspector</div>
+      <div class="bg-company">Al Yamama Steel · Jul – Dec 2025</div>
+      <p class="bg-desc">Dimensional and mechanical testing of rebar to ASTM, SASO, and client specifications. Logged test results for compliance reporting, monitored production defect rates, and prepared non-conformance documentation used by management for quality tracking.</p>
+      <div class="bg-tags">
+        <span class="bg-tag">ASTM Standards</span><span class="bg-tag">SASO Compliance</span><span class="bg-tag">NCR Documentation</span><span class="bg-tag">Root Cause Analysis</span><span class="bg-tag">CAPA</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <p class="section-label">My work</p>
+  <h2 class="section-title">Projects</h2>
+  <p class="section-sub">Four analyses, each built with SQL, Python, Excel, or Tableau — and each demonstrating a distinct analytical skill.</p>
+
+  <div class="projects-grid">
+
+    <div class="project-card featured c-tableau">
+      <div class="project-num">01 · Featured Project</div>
+      <h3 class="project-title">E-Commerce Sales Performance Dashboard</h3>
+      <p class="project-desc">Analysed 500K+ transaction records from the Olist Brazilian e-commerce dataset. Cleaned and aggregated data with SQL and Python, then built an interactive Tableau dashboard enabling drill-down by region, product category, and time period. Focused on revenue trends, delivery performance, and customer review scores.</p>
+      <div class="finding-box">
+        <div class="finding-label">Key Finding</div>
+        <div class="finding-text">Delivery delays exceeding 3 days correlated with a 34% drop in review scores. On-time deliveries averaged 4.2★ vs 1.9★ for delays over 7 days — suggesting a hard SLA threshold logistics teams should target.</div>
+      </div>
+      <div class="project-stack">
+        <span class="stack-tag">SQL</span><span class="stack-tag">Python</span><span class="stack-tag">pandas</span><span class="stack-tag">Tableau</span>
+      </div>
+      <a href="https://github.com/AhmedAfifiGetHub/data-analyst-portfolio/blob/main/project3_ecommerce_sales_analysis.ipynb" class="project-link">View on GitHub →</a>
+    </div>
+
+    <div class="project-card c-python">
+      <div class="project-num">02</div>
+      <h3 class="project-title">A/B Test Analysis: Checkout Flow</h3>
+      <p class="project-desc">Analysed a simulated A/B test comparing two checkout UX designs. Applied chi-square testing, confidence intervals, and power analysis to determine whether a 3.2% conversion lift was statistically significant.</p>
+      <p class="project-desc">Conclusion: significant at 95% confidence — recommended shipping the new flow with an estimated $80K annual revenue impact.</p>
+      <div class="project-stack">
+        <span class="stack-tag">Python</span><span class="stack-tag">scipy</span><span class="stack-tag">Matplotlib</span>
+      </div>
+      <a href="https://github.com/AhmedAfifiGetHub/data-analyst-portfolio/blob/main/project4_ab_test_analysis.ipynb" class="project-link">View on GitHub →</a>
+    </div>
+
+    <div class="project-card c-sql">
+      <div class="project-num">03</div>
+      <h3 class="project-title">NYC 311 City Service Analysis</h3>
+      <p class="project-desc">Queried 3M+ public 311 service complaint records using SQL to identify which boroughs wait longest for city responses, and which categories drive volume by time of day.</p>
+      <p class="project-desc">Key finding: noise complaints are the highest-volume category city-wide, peaking on Friday–Saturday between 10PM and 2AM.</p>
+      <div class="project-stack">
+        <span class="stack-tag">SQL</span><span class="stack-tag">Python</span><span class="stack-tag">Matplotlib</span><span class="stack-tag">Seaborn</span>
+      </div>
+      <a href="https://github.com/AhmedAfifiGetHub/data-analyst-portfolio/blob/main/project1_nyc311_analysis.ipynb" class="project-link">View on GitHub →</a>
+    </div>
+
+    <div class="project-card c-excel">
+      <div class="project-num">04</div>
+      <h3 class="project-title">Customer Churn Prediction & Dashboard</h3>
+      <p class="project-desc">Built a logistic regression model on a public telecom dataset in Python — 82% prediction accuracy. Contract type, tenure, and tech support were the strongest predictors.</p>
+      <p class="project-desc">Packaged findings into an Excel pivot dashboard and a one-page stakeholder summary a non-technical manager could act on immediately.</p>
+      <div class="project-stack">
+        <span class="stack-tag">Python</span><span class="stack-tag">scikit-learn</span><span class="stack-tag">pandas</span><span class="stack-tag">Excel</span>
+      </div>
+      <a href="https://github.com/AhmedAfifiGetHub/data-analyst-portfolio/blob/main/project2_customer_churn_prediction.ipynb" class="project-link">View on GitHub →</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- TOOLS -->
+<section id="tools">
+  <p class="section-label">Technical skills</p>
+  <h2 class="section-title">The Toolkit</h2>
+  <p class="section-sub">Four tools. Everything an entry-level analyst needs to contribute from day one.</p>
+  <div class="tools-grid">
+    <div class="tool-big">
+      <div class="tool-big-icon">🗄️</div>
+      <div class="tool-big-name">SQL</div>
+      <p class="tool-big-desc">Extracting, filtering, and aggregating data from relational databases.</p>
+      <div class="tool-skills">
+        <div class="tool-skill">SELECT, WHERE, GROUP BY, ORDER BY</div>
+        <div class="tool-skill">JOINs (INNER, LEFT, FULL OUTER)</div>
+        <div class="tool-skill">Subqueries & CTEs</div>
+        <div class="tool-skill">Window functions (RANK, ROW_NUMBER)</div>
+        <div class="tool-skill">Aggregate functions & HAVING</div>
+      </div>
+    </div>
+    <div class="tool-big">
+      <div class="tool-big-icon">🐍</div>
+      <div class="tool-big-name">Python</div>
+      <p class="tool-big-desc">Data wrangling, EDA, visualisation, and basic predictive modelling.</p>
+      <div class="tool-skills">
+        <div class="tool-skill">pandas — cleaning, merging, reshaping</div>
+        <div class="tool-skill">NumPy — numerical computation</div>
+        <div class="tool-skill">Matplotlib & Seaborn — charting</div>
+        <div class="tool-skill">scikit-learn — regression & classification</div>
+        <div class="tool-skill">Jupyter Notebooks — EDA workflow</div>
+      </div>
+    </div>
+    <div class="tool-big">
+      <div class="tool-big-icon">📋</div>
+      <div class="tool-big-name">Excel</div>
+      <p class="tool-big-desc">Reports and dashboards stakeholders can open without any training.</p>
+      <div class="tool-skills">
+        <div class="tool-skill">Pivot tables & pivot charts</div>
+        <div class="tool-skill">VLOOKUP / INDEX-MATCH</div>
+        <div class="tool-skill">IF, SUMIF, COUNTIF, AVERAGEIF</div>
+        <div class="tool-skill">Conditional formatting & slicers</div>
+        <div class="tool-skill">Interactive dashboard design</div>
+      </div>
+    </div>
+    <div class="tool-big">
+      <div class="tool-big-icon">📊</div>
+      <div class="tool-big-name">Tableau</div>
+      <p class="tool-big-desc">Interactive dashboards that let teams explore data without asking an analyst.</p>
+      <div class="tool-skills">
+        <div class="tool-skill">Connecting to CSV, Excel, SQL sources</div>
+        <div class="tool-skill">Calculated fields & LOD expressions</div>
+        <div class="tool-skill">Filters, parameters & dashboard actions</div>
+        <div class="tool-skill">Dashboard layout & design best practices</div>
+        <div class="tool-skill">Publishing to Tableau Public</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <p class="section-label">Let's talk</p>
+  <h2 class="section-title">Open to Opportunities</h2>
+  <p class="section-sub">Looking for entry-level data analyst roles in Saudi Arabia and remotely. If you want someone with real-world data discipline and an unusually rigorous QA background — let's connect.</p>
+  <div class="contact-links">
+    <a href="mailto:ahmed.afifi@email.com" class="contact-btn">📧 Email Me</a>
+    <a href="#" class="contact-btn">💼 LinkedIn</a>
+    <a href="#" class="contact-btn">🐙 GitHub</a>
+    <a href="#" class="contact-btn">📄 Download CV</a>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Ahmed Afifi — Data Analyst</p>
+  <p>SQL · Python · Excel · Tableau</p>
+</footer>
+</body>
+</html>
